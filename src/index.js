@@ -23,6 +23,16 @@ import styles from "./index.style.js";
 // Override default animations
 initializeRegistryWithDefinitions(ANIMATION_DEFINITIONS);
 
+const getHeight = () => {
+  if (Platform.OS === "ios") {
+    return Dimensions.get("window").height;
+  }
+
+  return require("react-native-extra-dimensions-android").get(
+    "REAL_WINDOW_HEIGHT"
+  );
+};
+
 // Utility for creating custom animations
 const makeAnimation = (name, obj) => {
   registerAnimation(name, createAnimation(obj));
@@ -92,7 +102,7 @@ export class ReactNativeModal extends Component {
     showContent: true,
     isVisible: false,
     deviceWidth: Dimensions.get("window").width,
-    deviceHeight: Dimensions.get("window").height,
+    deviceHeight: getHeight(),
     isSwipeable: this.props.swipeDirection ? true : false,
     pan: null
   };
@@ -293,7 +303,7 @@ export class ReactNativeModal extends Component {
   handleDimensionsUpdate = dimensionsUpdate => {
     // Here we update the device dimensions in the state if the layout changed (triggering a render)
     const deviceWidth = Dimensions.get("window").width;
-    const deviceHeight = Dimensions.get("window").height;
+    const deviceHeight = getHeight();
     if (
       deviceWidth !== this.state.deviceWidth ||
       deviceHeight !== this.state.deviceHeight
