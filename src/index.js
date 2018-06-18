@@ -401,6 +401,8 @@ export class ReactNativeModal extends Component {
       backdropOpacity,
       backdropTransitionInTiming,
       backdropTransitionOutTiming,
+      backdropAccessibilityProps,
+      containerAccessibilityProps,
       children,
       isVisible,
       onModalShow,
@@ -435,6 +437,7 @@ export class ReactNativeModal extends Component {
       );
     const containerView = (
       <View
+        {...containerAccessibilityProps}
         {...panHandlers}
         ref={ref => (this.contentRef = ref)}
         style={[panPosition, computedStyle]}
@@ -454,8 +457,12 @@ export class ReactNativeModal extends Component {
         onRequestClose={onBackButtonPress}
         {...otherProps}
       >
-        <TouchableWithoutFeedback onPress={onBackdropPress}>
+        <TouchableWithoutFeedback
+          {...backdropAccessibilityProps}
+          onPress={onBackdropPress}
+        >
           <View
+            accessible={backdropAccessibilityProps.accessible}
             ref={ref => (this.backdropRef = ref)}
             useNativeDriver={useNativeDriver}
             style={[
