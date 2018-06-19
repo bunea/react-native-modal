@@ -155,6 +155,7 @@ export class ReactNativeModal extends Component {
       "didUpdateDimensions",
       this.handleDimensionsUpdate
     );
+    this.handleDimensionsUpdate(null);
   }
 
   componentWillUnmount() {
