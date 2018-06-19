@@ -80,6 +80,13 @@ export class ReactNativeModal extends Component {
     backdropOpacity: 0.7,
     backdropTransitionInTiming: 300,
     backdropTransitionOutTiming: 300,
+    backdropAccessibilityProps: {
+      accessible: false,
+      importantForAccessibility: "no-hide-descendants"
+    },
+    containerAccessibilityProps: {
+      importantForAccessibility: "yes"
+    },
     onModalShow: () => null,
     onModalHide: () => null,
     isVisible: false,
